@@ -19,7 +19,7 @@
   </div>
   <ion-item>
     <a [routerLink]="['/recuperar']">Recuperar contraseña</a>
-    <ion-button slot="end" color="primary">Ingresar</ion-button>
+    <ion-button (click)="checkear(nombre, contrasena)" slot="end" color="primary">Ingresar</ion-button>
   </ion-item> 
 
 

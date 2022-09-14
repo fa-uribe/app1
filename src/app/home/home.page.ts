@@ -19,7 +19,8 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     
   }
-  async grabar(nom: HTMLInputElement, cont: HTMLInputElement)
+  
+  async checkear({ nom, cont }: { nom: HTMLInputElement; cont: HTMLInputElement; })
   {
     if(nom.value == "")
     {
