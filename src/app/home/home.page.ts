@@ -16,7 +16,8 @@ export class HomePage implements OnInit {
 
   constructor(private alertController: AlertController,
     private toastController: ToastController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public navParams: NavParams
     ) { }
 
   ngOnInit(): void {
@@ -41,6 +42,8 @@ export class HomePage implements OnInit {
     }
     else
     {
+      
+      
       this.navCtrl.navigateForward('/inicio');
 
     }
