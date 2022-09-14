@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, NavController, NavParams } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-home',
@@ -14,13 +15,16 @@ export class HomePage implements OnInit {
 
 
   constructor(private alertController: AlertController,
-    private toastController: ToastController) {}
+    private toastController: ToastController,
+    public navCtrl: NavController
+    ) { }
 
   ngOnInit(): void {
     
   }
-  
-  async checkear({ nom, cont }: { nom: HTMLInputElement; cont: HTMLInputElement; })
+
+
+  async checkear(nom: HTMLInputElement, cont: HTMLInputElement )
   {
     if(nom.value == "")
     {
@@ -34,6 +38,11 @@ export class HomePage implements OnInit {
     else if(cont.value == "")
     {
       this.mensaje = "Por favor ingrese su contraseña";
+    }
+    else
+    {
+      this.navCtrl.navigateForward('/inicio');
+
     }
   }
 
