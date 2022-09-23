@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,8 @@ export class InicioPage implements OnInit {
 
   nombre : String;
   
-  constructor() { 
+  constructor(private route: ActivatedRoute) { 
+      this.nombre = (route.snapshot.params['nombre']);
     }
 
   ngOnInit() {

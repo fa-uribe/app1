@@ -17,7 +17,6 @@ export class HomePage implements OnInit {
   constructor(private alertController: AlertController,
     private toastController: ToastController,
     public navCtrl: NavController,
-    public navParams: NavParams
     ) { }
 
   ngOnInit(): void {
@@ -25,7 +24,7 @@ export class HomePage implements OnInit {
   }
 
 
-  async checkear(nom: HTMLInputElement, cont: HTMLInputElement )
+  async checkear(nom: HTMLInputElement, cont: HTMLInputElement)
   {
     if(nom.value == "")
     {
@@ -42,7 +41,7 @@ export class HomePage implements OnInit {
     }
     else
     {
-      
+      this.nombre = nom.toString();
       this.navCtrl.navigateForward('/inicio');
     }
   }
