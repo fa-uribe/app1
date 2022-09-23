@@ -43,9 +43,7 @@ export class HomePage implements OnInit {
     else
     {
       
-      
       this.navCtrl.navigateForward('/inicio');
-
     }
   }
 
