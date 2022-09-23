@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: InicioPage
-  },
-  {
-    path: ':nombre',
-    component: InicioPage
   }
 ];
 

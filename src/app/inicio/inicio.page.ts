@@ -10,12 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 export class InicioPage implements OnInit {
 
   nombre : String;
-  
+
   constructor(private route: ActivatedRoute) { 
-      this.nombre = (route.snapshot.params['nombre']);
+      
     }
 
   ngOnInit() {
+    this.nombre = this.route.snapshot.paramMap.get('nombre');
+    console.log(this.nombre)
   }
+  
 
 }

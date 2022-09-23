@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController, NavController, NavParams } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, ToastController} from '@ionic/angular';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class HomePage implements OnInit {
 
   constructor(private alertController: AlertController,
     private toastController: ToastController,
-    public navCtrl: NavController,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
@@ -28,7 +29,6 @@ export class HomePage implements OnInit {
   {
     if(nom.value == "")
     {
-      this.mensaje = "Falta el nombre";
       const toast = await this.toastController.create({
         message : "Ingrese nombre de usuario",
         duration: 2000
@@ -37,12 +37,17 @@ export class HomePage implements OnInit {
     }
     else if(cont.value == "")
     {
-      this.mensaje = "Por favor ingrese su contraseña";
+      const toast = await this.toastController.create({
+        message : "Ingrese contraseña",
+        duration: 2000
+      })
+      toast.present();
     }
     else
     {
-      this.nombre = nom.toString();
-      this.navCtrl.navigateForward('/inicio');
+      this.nombre = nom.value;
+      console.log(this.nombre);
+      this.router.navigate(['/inicio', this.nombre]);
     }
   }
 
