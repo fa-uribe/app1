@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController} from '@ionic/angular';
-
+import { AlertController, ToastController, NavController, NavParams } from '@ionic/angular';
+import { ApirestService } from '../apirest.service';
 
 @Component({
   selector: 'app-home',
@@ -14,41 +14,34 @@ export class HomePage implements OnInit {
   contrasena : String;
   mensaje : String;
 
-
   constructor(private alertController: AlertController,
     private toastController: ToastController,
-    private router: Router,
+    private router: Router, public navCtrl: NavController,
+    private apirest: ApirestService
     ) { }
 
   ngOnInit(): void {
-    
+    this.apirest.getUsers();
+    this.apirest.listado
   }
-
 
   async checkear(nom: HTMLInputElement, cont: HTMLInputElement)
   {
     if(nom.value == "")
     {
-      const toast = await this.toastController.create({
-        message : "Ingrese nombre de usuario",
-        duration: 2000
-      })
-      toast.present();
+      this.mensaje = "Ingrese nombre de usuario";
     }
     else if(cont.value == "")
     {
-      const toast = await this.toastController.create({
-        message : "Ingrese contraseña",
-        duration: 2000
-      })
-      toast.present();
+      this.mensaje = "Por favor ingrese su contraseña";
+    }
+    else if(cont.value != "1234"){
+      this.mensaje = "Contraseña incorrecta";
     }
     else
     {
-      this.nombre = nom.value;
-      console.log(this.nombre);
       this.router.navigate(['/inicio', this.nombre]);
     }
   }
-
 }
+
