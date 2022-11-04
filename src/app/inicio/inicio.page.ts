@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { StoragesService } from '../storages.service';
+import { ApirestService } from '../apirest.service';
+
 
 
 @Component({
@@ -9,16 +14,38 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InicioPage implements OnInit {
 
-  nombre : String;
+  ide : String;
+  image : SafeResourceUrl;
+  lista = [];
 
-  constructor(private route: ActivatedRoute) { 
+  constructor(private route: ActivatedRoute, private router: Router, private domSanitizer: DomSanitizer, private storages: StoragesService, private apiRest: ApirestService) { 
       
     }
 
   ngOnInit() {
-    this.nombre = this.route.snapshot.paramMap.get('nombre');
-    console.log(this.nombre)
-  }
-  
 
+    this.ide = this.route.snapshot.paramMap.get('id');
+    this.apiRest.getPosts(this.ide);
+    this.lista = this.apiRest.listado;
+    console.log(this.ide);
+    console.log(this.lista);
+
+  }
+
+  async takePhoto(){
+      const result = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        source: CameraSource.Camera,
+        resultType: CameraResultType.Base64
+      });
+    
+      this.image = this.domSanitizer.bypassSecurityTrustResourceUrl(result && result.base64String)
+    };
+
+  cerrarSesion(){
+    this.storages.limpiar();
+    this.router.navigate(['/home']);
+  }
 }
+

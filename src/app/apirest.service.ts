@@ -4,11 +4,15 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApirestService {
   listado = [];
   item : any;
   private urlBaseApi = 'https://jsonplaceholder.typicode.com/';
-  constructor(private httpClient: HttpClient) { }
+  constructor(
+    private httpClient: HttpClient) { 
+      
+    }
 
   getUsers()
   {
@@ -27,16 +31,21 @@ export class ApirestService {
       })
     });
   }
-  
-  getUser(id: string)
-  {
-    let url = this.urlBaseApi + 'users';
+
+  getPosts(id: String){
+    let url = this.urlBaseApi + 'posts';
+    this.listado = [];
     return new Promise((resolve, rejects) => 
     {
-      this.httpClient.get(url).subscribe((data: any) =>
+      this.httpClient.get(url).subscribe((data:[]) =>
       {
         resolve(data);
-        this.item = data;
+        data.forEach(item => { 
+          if(item['userId'] == id)
+          {
+            this.listado.push(item); 
+          }
+        })
       },
       error =>
       {
@@ -44,5 +53,6 @@ export class ApirestService {
       })
     });
   }
+
 }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController, NavController, NavParams } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ApirestService } from '../apirest.service';
 
 @Component({
   selector: 'app-recuperar',
@@ -10,35 +12,37 @@ export class RecuperarPage implements OnInit {
 
   mensaje: String;
   nombre: String;
+  usuarios = [];
 
   constructor(private alertController: AlertController,
-    private toastController: ToastController,
-    public navCtrl: NavController) { }
+              private router : Router,
+              private apirest: ApirestService) { }
 
   ngOnInit() {
+    this.apirest.getUsers();
   }
 
-  async checkear(nom: HTMLInputElement, cont: HTMLInputElement, cont2: HTMLInputElement)
+  async checkear(nom: HTMLInputElement)
   {
     if(nom.value == "")
     {
-      this.mensaje = "Falta el nombre";
+      this.mensaje = "Ingrese username";
     }
-    else if(cont.value == "")
+    else if(!this.apirest.listado.find(({username}) => username === nom.value))
     {
-      this.mensaje = "Por favor ingrese su contraseña";
-    }
-    else if(cont2.value == "")
-    {
-      this.mensaje = "Por favor ingrese su contraseña nuevamente";
-    }
-    else if(cont.value != cont2.value)
-    {
-      this.mensaje = "Las contraseñas deben coincidir";
+      this.mensaje = "Usuario no existe";
     }
     else
     {
-      this.navCtrl.navigateRoot('/home');
+      const alert = await this.alertController.create({
+        header: 'Aviso',
+        subHeader: 'Recuperar contraseña',
+        message: 'Se ha enviado un correo electronico de recuperacion',
+        buttons: ['OK'],
+      });    
+      await alert.present();
+
+      this.router.navigate(['/home']);
     }
   }
 }
