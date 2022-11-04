@@ -16,7 +16,7 @@ export class ApirestService {
 
   getUsers()
   {
-    let url = this.urlBaseApi + 'users';
+    let url = this.urlBaseApi + 'users/';
     this.listado = [];
     return new Promise((resolve, rejects) => 
     {
@@ -33,7 +33,7 @@ export class ApirestService {
   }
 
   getPosts(id: String){
-    let url = this.urlBaseApi + 'posts';
+    let url = this.urlBaseApi + 'posts/';
     this.listado = [];
     return new Promise((resolve, rejects) => 
     {
@@ -42,6 +42,28 @@ export class ApirestService {
         resolve(data);
         data.forEach(item => { 
           if(item['userId'] == id)
+          {
+            this.listado.push(item); 
+          }
+        })
+      },
+      error =>
+      {
+        console.log("Error en el servidor")
+      })
+    });
+  }
+
+  getComments(id: String){
+    let url = this.urlBaseApi + 'posts/' + id + '/comments/';
+    this.listado = [];
+    return new Promise((resolve, rejects) => 
+    {
+      this.httpClient.get(url).subscribe((data:[]) =>
+      {
+        resolve(data);
+        data.forEach(item => { 
+          if(item['postId'] == id)
           {
             this.listado.push(item); 
           }

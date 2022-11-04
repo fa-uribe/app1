@@ -1,9 +1,24 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Detalle Post</ion-title>
+    <ion-title>Comentarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list *ngFor="let aux of lista">
+    <ion-row>
+      <ion-item>
+        <ion-label>{{aux.email}} : </ion-label>
+      </ion-item>
+    </ion-row>
+    <ion-item>
+      <ion-row>
+        <ion-label>{{aux.name}}</ion-label>
+      </ion-row>
+      <ion-row>
+        <ion-label>{{aux.body}}</ion-label>
+      </ion-row>
+    </ion-item>
+    <br>
+  </ion-list>
 </ion-content>
