@@ -1,15 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Posts</ion-title>
+    <ion-title>Posts <ion-icon name="newspaper-outline"></ion-icon></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list *ngFor="let aux of lista" [inset]="true">
-    <ion-item>
-      <a [routerLink]="(['/post', aux.id])"><ion-label>{{aux.id}}</ion-label>
-      <ion-label>{{aux.title}}</ion-label></a>
-    </ion-item>
+    <ion-card>
+        <ion-card-header>
+          <a [routerLink]="(['/post', aux.id])">
+            <ion-label>{{aux.title}}</ion-label>
+          </a>
+        </ion-card-header>
+      <ion-item>
+        <p>{{aux.body}}</p>
+      </ion-item>
+    </ion-card>
   </ion-list>
 </ion-content>
 
