@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list *ngFor="let aux of lista" [inset]="true">
-    <ion-card>
+    <ion-card color="light">
         <ion-card-header>
           <a [routerLink]="(['/post', aux.id])">
             <ion-label>{{aux.title}}</ion-label>

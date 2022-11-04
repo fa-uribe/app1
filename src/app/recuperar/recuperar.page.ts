@@ -37,7 +37,7 @@ export class RecuperarPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Aviso',
         subHeader: 'Recuperar contraseña',
-        message: 'Se ha enviado un correo electronico de recuperacion',
+        message: 'Se ha enviado un correo electronico de recuperación',
         buttons: ['OK'],
       });    
       await alert.present();
