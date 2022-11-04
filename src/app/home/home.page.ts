@@ -37,17 +37,17 @@ export class HomePage implements OnInit {
    
     if(nom.value == "")
     {
-      this.mensaje = "Ingrese nombre de usuario";
+      this.mensaje = " Ingrese nombre de usuario";
     }
     else if(cont.value == "")
     {
-      this.mensaje = "Por favor ingrese su contraseña";
+      this.mensaje = " Por favor, ingrese su contraseña";
     }
     else if(!this.apirest.listado.find(({username}) => username === this.nombre)){
-      this.mensaje = "Usuario no existe";
+      this.mensaje = " Usuario no existe";
     }
     else if(cont.value != "1234"){
-      this.mensaje = "Contraseña incorrecta";
+      this.mensaje = " Contraseña incorrecta";
     }
     else
     {

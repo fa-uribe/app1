@@ -6,7 +6,6 @@ import { StoragesService } from '../storages.service';
 import { ApirestService } from '../apirest.service';
 
 
-
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.page.html',
@@ -18,7 +17,11 @@ export class InicioPage implements OnInit {
   image : SafeResourceUrl;
   lista = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private domSanitizer: DomSanitizer, private storages: StoragesService, private apiRest: ApirestService) { 
+  constructor(private route: ActivatedRoute,
+     private router: Router, 
+     private domSanitizer: DomSanitizer, 
+     private storages: StoragesService, 
+     private apiRest: ApirestService) { 
       
     }
 
@@ -44,6 +47,7 @@ export class InicioPage implements OnInit {
     };
 
   cerrarSesion(){
+  
     this.storages.limpiar();
     this.router.navigate(['/home']);
   }

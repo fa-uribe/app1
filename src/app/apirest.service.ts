@@ -11,7 +11,6 @@ export class ApirestService {
   private urlBaseApi = 'https://jsonplaceholder.typicode.com/';
   constructor(
     private httpClient: HttpClient) { 
-      
     }
 
   getUsers()
